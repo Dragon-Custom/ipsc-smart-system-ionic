@@ -25,6 +25,7 @@ export default defineConfig({
 		setupFiles: "./src/setupTests.ts",
 	},
 	preview: {
+		port: 3001,
 		host: "0.0.0.0",
 		https: {
 			cert: "ssl/cert/_cert.pem",
