@@ -1,7 +1,7 @@
 {
-  "name": "ipsc-smart-system-ionic",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react-vite"
+	"name": "ipsc-smart-system-ionic",
+	"integrations": {
+		"capacitor": {}
+	},
+	"type": "react-vite"
 }
