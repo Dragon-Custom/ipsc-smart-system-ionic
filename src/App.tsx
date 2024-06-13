@@ -1,24 +1,35 @@
-import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route } from 'react-router-dom';
-import Menu from './components/Menu';
-import Page from './pages/Page';
+import React from "react";
+import {
+	IonApp,
+	IonButtons,
+	IonContent,
+	IonHeader,
+	IonMenuButton,
+	IonRouterOutlet,
+	IonSplitPane,
+	IonTitle,
+	IonToolbar,
+	setupIonicReact,
+} from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { Route, useLocation } from "react-router-dom";
+import { Menu } from "./components";
 
 /* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
+import "@ionic/react/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
+import "@ionic/react/css/normalize.css";
+import "@ionic/react/css/structure.css";
+import "@ionic/react/css/typography.css";
 
 /* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
+import "@ionic/react/css/padding.css";
+import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/text-alignment.css";
+import "@ionic/react/css/text-transformation.css";
+import "@ionic/react/css/flex-utils.css";
+import "@ionic/react/css/display.css";
 
 /**
  * Ionic Dark Mode
@@ -29,31 +40,61 @@ import '@ionic/react/css/display.css';
 
 /* import '@ionic/react/css/palettes/dark.always.css'; */
 /* import '@ionic/react/css/palettes/dark.class.css'; */
-import '@ionic/react/css/palettes/dark.system.css';
+import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
-import './theme/variables.css';
+import "./theme/variables.css";
+import { appPages } from "./appPage";
 
 setupIonicReact();
 
-const App: React.FC = () => {
-  return (
-	<IonApp>
-	  <IonReactRouter>
-		<IonSplitPane contentId="main">
-		  <Menu />
-		  <IonRouterOutlet id="main">
-			<Route path="/" exact={true}>
-				<Redirect to="/folder/Inbox" />
-			</Route>
-			<Route path="/folder/:name" exact={true}>
-				<Page />
-			</Route>
-		  </IonRouterOutlet>
+function AppView() {
+	const location = useLocation();
+
+	const currentPageTitle = React.useMemo(() => {
+		return appPages.find((page) => page.url === location.pathname)?.title;
+	}, [location]);
+
+	return (
+		<IonSplitPane when="md" contentId="main">
+			<Menu />
+			<div className="ion-page" id="main">
+				<IonToolbar>
+					<IonButtons slot="start">
+						<IonMenuButton></IonMenuButton>
+					</IonButtons>
+					<IonTitle>IPSC Smart System | {currentPageTitle}</IonTitle>
+				</IonToolbar>
+				<IonContent className="ion-padding">
+					<IonRouterOutlet id="main" style={{ padding: 10}}>
+						{/*
+							Use the render method to reduce the number of renders your component will have due to a route change.
+							Use the component prop when your component depends on the RouterComponentProps passed in automatically.
+						*/}
+						{appPages.map((appPage, index) => (
+							<Route
+								key={index}
+								path={appPage.url}
+								render={appPage.component}
+								exact={true}
+							/>
+						))}
+					</IonRouterOutlet>
+				</IonContent>
+			</div>
 		</IonSplitPane>
-	  </IonReactRouter>
-	</IonApp>
-  );
+	);
+}
+
+
+const App: React.FC = () => {
+	return (
+		<IonApp>
+			<IonReactRouter>
+				<AppView />
+			</IonReactRouter>
+		</IonApp>
+	);
 };
 
 export default App;
