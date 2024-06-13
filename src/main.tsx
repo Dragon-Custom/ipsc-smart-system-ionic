@@ -3,13 +3,12 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import { setupIonicReact } from "@ionic/react";
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
-import { BleClient } from "@capacitor-community/bluetooth-le";
-
+import "./index.css"
 const container = document.getElementById("root");
 const root = createRoot(container!);
 defineCustomElements(window);
 
-await BleClient.initialize({ androidNeverForLocation: true });
+import { KonstaProvider } from "konsta/react";
 
 setupIonicReact({
 	rippleEffect: false,
@@ -17,6 +16,8 @@ setupIonicReact({
 });
 root.render(
 	<React.StrictMode>
-		<App />
+		<KonstaProvider theme="parent">
+			<App />
+		</KonstaProvider>
 	</React.StrictMode>
 );
