@@ -13,7 +13,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Route, useLocation } from "react-router-dom";
-import { Menu } from "./components";
+import { Menu , Toolbar } from "./components";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -49,22 +49,11 @@ import { appPages } from "./appPage";
 setupIonicReact();
 
 function AppView() {
-	const location = useLocation();
-
-	const currentPageTitle = React.useMemo(() => {
-		return appPages.find((page) => page.url === location.pathname)?.title;
-	}, [location]);
-
 	return (
 		<IonSplitPane when="md" contentId="main">
 			<Menu />
 			<div className="ion-page" id="main">
-				<IonToolbar>
-					<IonButtons slot="start">
-						<IonMenuButton></IonMenuButton>
-					</IonButtons>
-					<IonTitle>IPSC Smart System | {currentPageTitle}</IonTitle>
-				</IonToolbar>
+				<Toolbar />
 				<IonContent className="ion-padding">
 					<IonRouterOutlet id="main" style={{ padding: 10}}>
 						{/*
