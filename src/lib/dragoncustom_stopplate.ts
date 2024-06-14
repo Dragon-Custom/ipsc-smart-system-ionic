@@ -146,9 +146,11 @@ export class DragonCustomStopplate extends StopPlate {
 			SERVICE_UUID,
 			SETTING_CHARACTERISTIC_UUID
 		);
-		return JSON.parse(
+		const result = JSON.parse(
 			new TextDecoder().decode(SETTING_CHAR)
 		) as StopplateSettingDTO;
+		console.log("retrieveConfig", result);
+		return result;
 	}
 	async setConfig(config: StopplateSettingDTO): Promise<void> {
 		if (!this.bleDevice?.deviceId) return;
