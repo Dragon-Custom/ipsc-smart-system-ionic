@@ -9,13 +9,14 @@ import {
 	Page,
 	useTheme,
 } from "konsta/react";
-import { IonCol, IonGrid, IonIcon, IonRow, IonText } from "@ionic/react";
+import { IonCol, IonGrid, IonIcon, IonRow, IonText, useIonToast } from "@ionic/react";
 import { time, timeOutline } from "ionicons/icons";
 import { FC, useMemo, useState } from "react";
-import { BLEStopplateService, beep } from "../../lib";
+import { beep } from "../../lib";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import { ScreenReader } from "@capacitor/screen-reader";
 import { TimerSetting } from "./Setting";
+import { useToggle } from "@uidotdev/usehooks";
 
 let stopCountdown: () => void;
 const Timer: FC = () => {
@@ -71,7 +72,7 @@ const Timer: FC = () => {
 
 	return (
 		<>
-			<TimerSetting openTrigger="timer-setting" />
+			<TimerSetting key="uniqueKey"  openTrigger="timer-setting" />
 			<IonGrid>
 				<IonRow>
 					<IonCol size="12">
