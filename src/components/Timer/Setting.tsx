@@ -23,9 +23,17 @@ import {
 	ListItem,
 	Page,
 	Range,
+	Segmented,
+	SegmentedButton,
 	Toolbar,
 } from "konsta/react";
-import { DragonCustomStopplate, StopplateSettingDTO } from "../../lib";
+import {
+	BUZZER_WAVEFORM_OBJECT,
+	BuzzerWaveformType,
+	DragonCustomStopplate,
+	StopplateSettingDTO,
+	beep,
+} from "../../lib";
 import { delay } from "../../lib/delay";
 import { useCounter } from "@uidotdev/usehooks";
 
@@ -178,6 +186,8 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 	const BLEInstance = DragonCustomStopplate.getInstance();
 	const [loading, loaded] = useIonLoading();
 
+	// #region config
+	const [wave, setWave] = useState(BuzzerWaveformType.SINE);
 	const [
 		[indicatorDuration, setIndicatorDuration],
 		IndicatorLightSettingElement,
@@ -238,6 +248,7 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 			}}
 		/>
 	));
+	// #endregion
 
 	async function onConnectButtonClicked() {
 		loading("Connecting...");
@@ -262,6 +273,21 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 		}
 	}
 
+	async function onApplyConfigButtonClicked() {
+		await BLEInstance.setConfig({
+			buzzer_duration: buzzerDuration,
+			buzzer_frequency: buzzerFrequency,
+			indicator_light_up_duration: indicatorDuration,
+			countdown_random_time_max: coutdownRandomTime[1],
+			countdown_random_time_min: coutdownRandomTime[0],
+			buzzer_waveform: wave,
+		});
+	}
+
+	function onTestBuzzerButtonClicked() {
+		beep(buzzerFrequency, BUZZER_WAVEFORM_OBJECT[wave], buzzerDuration * 1000);
+	}
+
 	useEffect(() => {
 		(async () => {
 			await delay(100);
@@ -270,6 +296,10 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 			setIndicatorDuration(stopplateConfig.indicator_light_up_duration);
 			setBuzzerFrequency(stopplateConfig.buzzer_frequency);
 			setBuzzerDuration(stopplateConfig.buzzer_duration);
+			setCoutdownRandomTime([
+				stopplateConfig.countdown_random_time_min,
+				stopplateConfig.countdown_random_time_max,
+			]);
 		})();
 	}, [connected]);
 
@@ -311,11 +341,35 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 						>
 							{connected ? "Disconnect" : "Connect"}
 						</Button>
-						<List>
+						<List hidden={!connected}>
+							<Button
+								outline
+								raised
+								onClick={onApplyConfigButtonClicked}
+							>
+								Apply change
+							</Button>
 							{IndicatorLightSettingElement}
 							{BuzzerFrequencySettingElement}
 							{BuzzerDurationSettingElement}
 							{CoutdownRandomTimeSettingElement}
+							<Segmented outline raised>
+								{BUZZER_WAVEFORM_OBJECT.map((item, index) => (
+									<SegmentedButton
+										active={wave === index}
+										onClick={() => setWave(index)}
+									>
+										{item}
+									</SegmentedButton>
+								))}
+							</Segmented>
+							<Button
+								tonal
+								raised
+								onClick={onTestBuzzerButtonClicked}
+							>
+								Test buzzer
+							</Button>
 						</List>
 					</Page>
 				</div>
