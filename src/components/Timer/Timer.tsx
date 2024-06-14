@@ -15,6 +15,7 @@ import { FC, useMemo, useState } from "react";
 import { BLEStopplateService, beep } from "../../lib";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import { ScreenReader } from "@capacitor/screen-reader";
+import { TimerSetting } from "./Setting";
 
 let stopCountdown: () => void;
 const Timer: FC = () => {
@@ -51,10 +52,9 @@ const Timer: FC = () => {
 			setDisplayTime(countdowntime / 1000);
 		}, 10);
 		setTimeout(() => {
-			if (!coundownFlag)
-				return;
+			if (!coundownFlag) return;
 			beep(1024, "sawtooth", 1000);
-			Haptics.vibrate({duration: 1000});
+			Haptics.vibrate({ duration: 1000 });
 			stopCountdown();
 			setDisplayTime(0);
 		}, countdowntime);
@@ -70,7 +70,8 @@ const Timer: FC = () => {
 	}
 
 	return (
-		<Page>
+		<>
+			<TimerSetting openTrigger="timer-setting" />
 			<IonGrid>
 				<IonRow>
 					<IonCol size="12">
@@ -84,6 +85,34 @@ const Timer: FC = () => {
 							>
 								{displayTime.toFixed(2)}
 							</h1>
+						</IonText>
+					</IonCol>
+				</IonRow>
+				<IonRow>
+					<IonCol size="6">
+						<IonText>
+							<pre
+								style={{
+									textAlign: "center",
+									width: "100%",
+									fontSize: "3vw",
+								}}
+							>
+								Shot: #10/10
+							</pre>
+						</IonText>
+					</IonCol>
+					<IonCol size="6">
+						<IonText>
+							<pre
+								style={{
+									textAlign: "center",
+									width: "100%",
+									fontSize: "3vw",
+								}}
+							>
+								Split: 00.10
+							</pre>
 						</IonText>
 					</IonCol>
 				</IonRow>
@@ -114,7 +143,10 @@ const Timer: FC = () => {
 								</Button>
 							</IonCol>
 							<IonCol size="6">
-								<Button disabled={buttonDisabled.setting}>
+								<Button
+									disabled={buttonDisabled.setting}
+									id="timer-setting"
+								>
 									Setting
 								</Button>
 							</IonCol>
@@ -136,7 +168,7 @@ const Timer: FC = () => {
 					</IonCol>
 				</IonRow>
 			</IonGrid>
-		</Page>
+		</>
 	);
 };
 
