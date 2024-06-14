@@ -1,2 +1,3 @@
 export * from "./buzzer"
-export * from "./stopplate_ble"
+export * from "./stopplate"
+export * from "./dragoncustom_stopplate"
