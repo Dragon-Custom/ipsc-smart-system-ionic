@@ -167,6 +167,12 @@ const Timer: FC = () => {
 			setDisplayHitRecordIndex(0);
 			stopCountdown?.();
 			setDisplayTime(0);
+			setButtonDisabled({
+				review: true,
+				start: false,
+				clear: true,
+				setting: false,
+			});
 		};
 	}, []);
 
@@ -280,11 +286,15 @@ const Timer: FC = () => {
 										2
 									)}s`}
 									//because the list is reversed, we need to subtract the index from the length of the array to get the correct index of the record
-									onClick={() => onRecordClick(hitRecord.length - 1 - index)}
+									onClick={() =>
+										onRecordClick(
+											hitRecord.length - 1 - index
+										)
+									}
 								/>
 							))}
 							{hitRecord.length === 0 && (
-								<ListItem 
+								<ListItem
 									link
 									chevron={false}
 									title="No hit record"
