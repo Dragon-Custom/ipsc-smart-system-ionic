@@ -15,13 +15,8 @@ const https: HttpsServerOptions = {
 export default defineConfig({
 	plugins: [
 		react(),
-		// legacy(),
 		VitePWA({
 			registerType: "autoUpdate",
-			// devOptions: {
-			// 	enabled: true,
-			// },
-			// mode: "development",
 		}),
 	],
 	test: {
