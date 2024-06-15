@@ -13,28 +13,6 @@ const root = createRoot(container!);
 
 defineCustomElements(window);
 
-window.addEventListener("beforeinstallprompt", (e) => {
-	console.log("beforeinstallprompt Event fired");
-	// Prevent Chrome 67 and earlier from automatically showing the prompt
-	// e.preventDefault();
-	// Stash the event so it can be triggered later.
-	let deferredPrompt = e;
-	let showInstallBtn = true;
-	if (deferredPrompt !== undefined && deferredPrompt !== null) {
-		// Show the prompt
-		deferredPrompt.prompt();
-		// Wait for the user to respond to the prompt
-		deferredPrompt.userChoice.then((choiceResult) => {
-			if (choiceResult.outcome === "accepted") {
-				console.log("User accepted the A2HS prompt");
-			} else {
-				console.log("User dismissed the A2HS prompt");
-			}
-			// We no longer need the prompt.  Clear it up.
-			deferredPrompt = null;
-		});
-	}
-});
 
 setupIonicReact({
 	rippleEffect: true,

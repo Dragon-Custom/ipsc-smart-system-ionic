@@ -19,7 +19,8 @@ import { Menu, Toolbar } from "./components";
 import "@ionic/react/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-import "@ionic/react/css/normalize.css";
+//!!! THIS CSS WILL BREAK THE KUI !!!
+// import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
 
@@ -38,8 +39,8 @@ import "@ionic/react/css/display.css";
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* import '@ionic/react/css/palettes/dark.always.css'; */
-/* import '@ionic/react/css/palettes/dark.class.css'; */
+// import '@ionic/react/css/palettes/dark.always.css';
+// import '@ionic/react/css/palettes/dark.class.css';
 import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
@@ -72,6 +73,7 @@ function AppView() {
 		</IonSplitPane>
 	);
 }
+
 
 const App: React.FC = () => {
 	return (
