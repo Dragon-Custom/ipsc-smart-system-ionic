@@ -132,18 +132,20 @@ const SettingSliderBlock: React.FC<SettingSliderBlockProps> = (
 									pinFormatter={(value) =>
 										`${value}${props.unit || ""}`
 									}
-									onIonChange={(e) =>
-										props.dual
-											? props.onChange([
-													e.detail.value
-														.lower as number,
-													e.detail.value
-														.upper as number,
-											  ])
-											: props.onChange(
-													e.detail.value as number
-											  )
-									}
+									onIonChange={(e) => {
+										if (props.dual) {
+											const range = e.detail.value as {
+												lower: number;
+												upper: number;
+											};
+											props.onChange([
+												range.lower,
+												range.upper,
+											]);
+										} else {
+											props.onChange(e.detail.value as number);
+										}
+									}}
 									dualKnobs={props.dual}
 								/>
 							</div>
@@ -285,7 +287,11 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 	}
 
 	function onTestBuzzerButtonClicked() {
-		beep(buzzerFrequency, BUZZER_WAVEFORM_OBJECT[wave], buzzerDuration * 1000);
+		beep(
+			buzzerFrequency,
+			BUZZER_WAVEFORM_OBJECT[wave],
+			buzzerDuration * 1000
+		);
 	}
 
 	useEffect(() => {
