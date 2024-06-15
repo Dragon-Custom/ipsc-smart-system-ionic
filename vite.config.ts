@@ -19,13 +19,13 @@ const https: HttpsServerOptions = {
 export default defineConfig({
 	plugins: [
 		react(),
-		legacy(),
+		// legacy(),
 		VitePWA({
-			registerType: "prompt",
-			devOptions: {
-				enabled: true,
-			},
-			mode: "development",
+			registerType: "autoUpdate",
+			// devOptions: {
+			// 	enabled: true,
+			// },
+			// mode: "development",
 		}),
 	],
 	test: {
