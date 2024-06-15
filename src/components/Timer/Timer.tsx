@@ -239,6 +239,7 @@ const Timer: FC = () => {
 								<Button
 									disabled={buttonDisabled.review}
 									onClick={onReviewButtonClick}
+									large
 								>
 									Review
 								</Button>
@@ -247,6 +248,7 @@ const Timer: FC = () => {
 								<Button
 									disabled={buttonDisabled.start}
 									onClick={onStartButtonClick}
+									large
 								>
 									Start
 								</Button>
@@ -257,6 +259,7 @@ const Timer: FC = () => {
 								<Button
 									disabled={buttonDisabled.clear}
 									onClick={onClearButtonClick}
+									large
 								>
 									{countingDown ? "Stop" : "Clear"}
 								</Button>
@@ -265,6 +268,8 @@ const Timer: FC = () => {
 								<Button
 									disabled={buttonDisabled.setting}
 									id="timer-setting"
+									raised
+									large
 								>
 									Setting
 								</Button>

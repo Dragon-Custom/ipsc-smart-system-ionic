@@ -8,6 +8,7 @@ import { useSetting } from "../../lib/useSetting";
 const SettingPage: FC = () => {
 	const {
 		darkMode: [, DarkModeSwitch],
+		useMd: [, ThemeToggle],
 	} = useSetting();
 
 	return (
@@ -15,6 +16,7 @@ const SettingPage: FC = () => {
 			<Page>
 				<List strong inset>
 					{DarkModeSwitch}
+					{ThemeToggle}
 				</List>
 			</Page>
 		</>

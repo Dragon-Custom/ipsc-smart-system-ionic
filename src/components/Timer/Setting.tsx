@@ -353,6 +353,7 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 									? onDisconnectButtonClicked
 									: onConnectButtonClicked
 							}
+							largeIos
 						>
 							{connected ? "Disconnect" : "Connect"}
 						</Button>
@@ -361,6 +362,7 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 								outline
 								raised
 								onClick={onApplyConfigButtonClicked}
+								largeIos
 							>
 								Apply change
 							</Button>
@@ -383,6 +385,7 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 								tonal
 								raised
 								onClick={onTestBuzzerButtonClicked}
+								largeIos
 							>
 								Test buzzer
 							</Button>

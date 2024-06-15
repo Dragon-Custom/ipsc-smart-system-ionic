@@ -11,7 +11,7 @@ export function useControl<T>(
 		setValue(newValue);
 	};
 
-	const element: React.ReactElement = <>{elements(value, change)}</>;
+	const element: React.ReactElement = elements(value, change);
 
 	return [[value, setValue], element];
 }
