@@ -4,6 +4,7 @@ import legacy from "@vitejs/plugin-legacy";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import selfAssignCert from "@vitejs/plugin-basic-ssl";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,6 +18,12 @@ export default defineConfig({
 			domains: ["*.custom.com"],
 			/** custom certification directory */
 			certDir: "ssl/cert/",
+		}),
+		VitePWA({
+			registerType: "prompt",
+			devOptions: {
+				enabled: true,
+			},
 		}),
 	],
 	test: {
