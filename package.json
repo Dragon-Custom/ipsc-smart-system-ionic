@@ -10,7 +10,7 @@
 		"test.e2e": "cypress run",
 		"test.unit": "vitest",
 		"lint": "eslint",
-		"cap:sync": "cap run sync",
+		"cap:sync": "cap sync",
 		"cap:android": "cap run android"
 	},
 	"dependencies": {
