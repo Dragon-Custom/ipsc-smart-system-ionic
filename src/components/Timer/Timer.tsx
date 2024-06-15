@@ -146,14 +146,15 @@ const Timer: FC = () => {
 		});
 	}
 
-	function onReviewButtonClick() {
+	const onReviewButtonClick = useCallback(() => {
+		Stopplate.clearAllHitCallbacks();
 		setButtonDisabled({
 			clear: false,
 			review: true,
 			start: true,
 			setting: true,
 		});
-	}
+	}, [hitCallbackID]);
 
 	function onRecordClick(index: number) {
 		setDisplayHitRecordIndex(index);

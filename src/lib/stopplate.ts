@@ -45,7 +45,7 @@ export abstract class StopPlate {
 		return this.disconnect_cb.push(func);
 	}
 	unregisterDisconnectCallback(callback_id: number) {
-		delete this.disconnect_cb[callback_id];
+		this.disconnect_cb[callback_id] = () => {};
 	}
 	
 	registerHitCallback(func: StopPlateHitCallback): CallbackID {
@@ -53,7 +53,7 @@ export abstract class StopPlate {
 	}
 	
 	unregisterHitCallback(callback_id: CallbackID) {
-		delete this.hit_cb[callback_id];
+		this.hit_cb[callback_id] = () => {};
 	}
 	
 	clearAllHitCallbacks() {
