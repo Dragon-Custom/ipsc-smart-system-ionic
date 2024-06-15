@@ -1,4 +1,3 @@
-// /** @type {import('tailwindcss').Config} */
 // export default {
 // 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 // 	theme: {
@@ -9,9 +8,10 @@
 
 const konstaConfig = require("konsta/config");
 
-module.exports = konstaConfig({
+/** @type {import('tailwindcss').Config} */
+export default konstaConfig({
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
-	darkMode: "media",
+	darkMode: "selector",
 	theme: {
 		extend: {},
 	},

@@ -13,12 +13,16 @@ const root = createRoot(container!);
 
 defineCustomElements(window);
 
-
 setupIonicReact({
 	rippleEffect: true,
 	animated: true,
 	mode: "md",
 });
+// if (localStorage.getItem("darkMode") === "true") {
+// 	document.documentElement.classList.add("dark", "ion-palette-dark");
+// } else {
+// 	document.documentElement.classList.remove("dark", "ion-palette-dark");
+// }
 root.render(
 	<React.StrictMode>
 		<KonstaProvider theme="parent">

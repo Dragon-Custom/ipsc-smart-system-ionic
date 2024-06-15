@@ -1,33 +1,20 @@
 import { List, ListItem, Page, Toggle } from "konsta/react";
 import { useControl } from "../../lib/useControl";
 import { FC, useEffect } from "react";
+import { Preferences } from "@capacitor/preferences";
+import { delay } from "../../lib/delay";
+import { useSetting } from "../../lib/useSetting";
 
 const SettingPage: FC = () => {
-	const [[enableDarkMode, setEnableDarkMode], EnableDarkModeSwitch] =
-		useControl(false, (value, set) => (
-			<ListItem
-				label
-				title="Dark mode"
-				after={
-					<Toggle
-						component="div"
-						className="-my-1"
-						checked={value}
-						onChange={() => set(!value)}
-					/>
-				}
-			/>
-		));
-	
-	useEffect(() => {
-
-	})
+	const {
+		darkMode: [, DarkModeSwitch],
+	} = useSetting();
 
 	return (
 		<>
 			<Page>
 				<List strong inset>
-					{EnableDarkModeSwitch}
+					{DarkModeSwitch}
 				</List>
 			</Page>
 		</>
