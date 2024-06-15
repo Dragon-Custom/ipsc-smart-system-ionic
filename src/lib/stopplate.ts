@@ -39,30 +39,27 @@ export abstract class StopPlate {
 	abstract retrieveConfig(): Promise<StopplateSettingDTO | false>;
 	abstract setConfig(config: StopplateSettingDTO): Promise<void>;
 	abstract performTimeSync(): Promise<void>;
+	abstract getPrecisionTime(): number;
 
 	registerDisconnectCallback(func: Function): number {
-		const callback_id = Math.random();
-		this.disconnect_cb[callback_id] = func;
-		return callback_id;
+		return this.disconnect_cb.push(func);
 	}
 	unregisterDisconnectCallback(callback_id: number) {
 		delete this.disconnect_cb[callback_id];
 	}
 
 	registerHitCallback(func: StopPlateHitCallback): CallbackID {
-		const callback_id = Math.random();
-		this.hit_cb[callback_id] = func;
-		return callback_id;
+		return this.hit_cb.push(func);
 	}
 
 	unregisterHitCallback(callback_id: CallbackID) {
 		delete this.hit_cb[callback_id];
 	}
 
-	private onHit(timestamp: number) {
-		this.hit_cb.forEach((cb) => cb(timestamp));
+	protected onHit(timestamp: number) {
+		this.hit_cb.map((cb) => cb(timestamp));
 	}
 	protected onDisconnect() {
-		this.disconnect_cb.forEach((cb) => cb());
+		this.disconnect_cb.map((cb) => cb());
 	}
 }

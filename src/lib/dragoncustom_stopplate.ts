@@ -27,6 +27,7 @@ const SETTING_CHARACTERISTIC_UUID = "798f2478-4c44-417f-bb6e-ee2a826cc17c";
 
 export class DragonCustomStopplate extends StopPlate {
 	private bleDevice: BleDevice | null = null;
+	private previousBleDevice: BleDevice | null = null;
 
 	private static _instance: DragonCustomStopplate | null = null;
 	public static getInstance(): DragonCustomStopplate {
@@ -75,10 +76,21 @@ export class DragonCustomStopplate extends StopPlate {
 			await BleClient.discoverServices(this.bleDevice.deviceId);
 		this.bleDevice = device;
 
+		BleClient.startNotifications(
+			this.bleDevice.deviceId,
+			SERVICE_UUID,
+			STOP_SIGNAL_CHARACTERISTIC_UUID,
+			(data) => {
+				let timestamp = new TextDecoder().decode(data);
+				console.log("stop signal", timestamp);
+				this.onHit(parseFloat(timestamp));
+			}
+		);
+
 		return true;
 	}
 
-	private getPrecisionTime() {
+	public getPrecisionTime() {
 		return Date.now() * 0.001;
 	}
 	/**
@@ -126,6 +138,7 @@ export class DragonCustomStopplate extends StopPlate {
 
 	private _onDisconnect = (deviceId: string) => {
 		console.log("device disconnected", deviceId);
+		this.previousBleDevice = this.bleDevice;
 		this.bleDevice = null;
 		this.onDisconnect();
 	};
