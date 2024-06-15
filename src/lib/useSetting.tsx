@@ -1,8 +1,8 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect } from "react";
 import { useControl } from "./useControl";
 import { ListItem, Toggle } from "konsta/react";
 import { Preferences } from "@capacitor/preferences";
-import { setupIonicReact, useIonAlert } from "@ionic/react";
+import { useIonAlert } from "@ionic/react";
 
 let updateFn: Function[] = [];
 export function useSetting() {

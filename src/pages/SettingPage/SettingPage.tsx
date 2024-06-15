@@ -1,8 +1,5 @@
-import { List, ListItem, Page, Toggle } from "konsta/react";
-import { useControl } from "../../lib/useControl";
-import { FC, useEffect } from "react";
-import { Preferences } from "@capacitor/preferences";
-import { delay } from "../../lib/delay";
+import { List, Page } from "konsta/react";
+import { FC } from "react";
 import { useSetting } from "../../lib/useSetting";
 
 const SettingPage: FC = () => {
