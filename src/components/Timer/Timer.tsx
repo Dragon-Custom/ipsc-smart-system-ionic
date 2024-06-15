@@ -9,10 +9,17 @@ import {
 	Page,
 	useTheme,
 } from "konsta/react";
-import { IonCol, IonGrid, IonIcon, IonRow, IonText, useIonToast } from "@ionic/react";
+import {
+	IonCol,
+	IonGrid,
+	IonIcon,
+	IonRow,
+	IonText,
+	useIonToast,
+} from "@ionic/react";
 import { time, timeOutline } from "ionicons/icons";
 import { FC, useMemo, useState } from "react";
-import { beep } from "../../lib";
+import { DragonCustomStopplate, StopplateSettingDTO, beep } from "../../lib";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import { ScreenReader } from "@capacitor/screen-reader";
 import { TimerSetting } from "./Setting";
@@ -22,6 +29,7 @@ let stopCountdown: () => void;
 const Timer: FC = () => {
 	const [countingDown, setCountingDown] = useState(false);
 	const [displayTime, setDisplayTime] = useState(0);
+	const Stopplate = DragonCustomStopplate.getInstance();
 
 	const buttonDisabled: {
 		review: boolean;
@@ -42,15 +50,25 @@ const Timer: FC = () => {
 		return result;
 	}, [countingDown]);
 
-	function onStartButtonClick() {
-		//todo: replace with the actual timer config
-		let countdowntime = 1350;
+	async function onStartButtonClick() {
+		let config = await Stopplate.retrieveConfig();
+		if (config == false) {
+			alert("Please connect to the stopplate first");
+		}
+		config = config as StopplateSettingDTO;
+		let countdownTime =
+			Math.random() *
+				(config.countdown_random_time_max -
+					config.countdown_random_time_min) +
+			config.countdown_random_time_min;
+		countdownTime *= 1000;
+
 		Haptics.impact({ style: ImpactStyle.Heavy });
 		setCountingDown(true);
 		let coundownFlag = true;
 		let countdown = setInterval(() => {
-			countdowntime -= 10;
-			setDisplayTime(countdowntime / 1000);
+			countdownTime -= 10;
+			setDisplayTime(countdownTime / 1000);
 		}, 10);
 		setTimeout(() => {
 			if (!coundownFlag) return;
@@ -58,7 +76,7 @@ const Timer: FC = () => {
 			Haptics.vibrate({ duration: 1000 });
 			stopCountdown();
 			setDisplayTime(0);
-		}, countdowntime);
+		}, countdownTime);
 		stopCountdown = () => {
 			coundownFlag = false;
 			clearInterval(countdown);
@@ -72,7 +90,7 @@ const Timer: FC = () => {
 
 	return (
 		<>
-			<TimerSetting key="uniqueKey"  openTrigger="timer-setting" />
+			<TimerSetting openTrigger="timer-setting" />
 			<IonGrid>
 				<IonRow>
 					<IonCol size="12">
