@@ -1,21 +1,37 @@
 {
-  "short_name": "Ionic App",
-  "name": "My Ionic App",
-  "icons": [
-    {
-      "src": "assets/icon/favicon.png",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "assets/icon/icon.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff"
+	"short_name": "IPSC Smart System",
+	"name": "IPSC Smart System",
+	"icons": [
+		{
+			"src": "assets/icon/favicon.png",
+			"sizes": "64x64",
+			"type": "image/x-icon"
+		},
+		{
+			"src": "assets/icon/logo@512x512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "any"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "assets/screenshots/image.png",
+			"sizes": "1817x1005",
+			"type": "image/png",
+			"form_factor": "wide",
+			"label": "Timer page of IPSC Smart System"
+		},
+		{
+			"src": "assets/screenshots/image1.png",
+			"sizes": "808x1600",
+			"type": "image/png",
+			"form_factor": "narrow",
+			"label": "Timer page of IPSC Smart System"
+		}
+	],
+	"start_url": ".",
+	"display": "fullscreen",
+	"theme_color": "#ffffff",
+	"background_color": "#ffffff"
 }

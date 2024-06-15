@@ -31,3 +31,7 @@ yarn-error.log*
 .eslintcache
 
 megalinter-reports/
+
+ssl
+
+dev-dist
