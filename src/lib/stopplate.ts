@@ -47,13 +47,17 @@ export abstract class StopPlate {
 	unregisterDisconnectCallback(callback_id: number) {
 		delete this.disconnect_cb[callback_id];
 	}
-
+	
 	registerHitCallback(func: StopPlateHitCallback): CallbackID {
 		return this.hit_cb.push(func);
 	}
-
+	
 	unregisterHitCallback(callback_id: CallbackID) {
 		delete this.hit_cb[callback_id];
+	}
+	
+	clearAllHitCallbacks() {
+		this.hit_cb = [];
 	}
 
 	protected onHit(timestamp: number) {

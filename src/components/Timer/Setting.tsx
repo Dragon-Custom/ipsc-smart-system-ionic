@@ -310,18 +310,21 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 			});
 	}, []);
 
-	useEffect(() => {
-		return () => {
-			if (typeof cb_id === "number")
-				BLEInstance.unregisterDisconnectCallback(cb_id);
-		};
-	}, []);
+	// useEffect(() => {
+	// 	return () => {
+	// 		if (typeof cb_id === "number")
+	// 			BLEInstance.unregisterDisconnectCallback(cb_id);
+	// 	};
+	// }, []);
 
 	return (
 		<>
 			<IonModal
 				id="setting-modal"
 				ref={modal}
+				onIonModalDidPresent={() =>
+					setConnected(BLEInstance.isConnected)
+				}
 				trigger={props.openTrigger}
 			>
 				<div className="wrapper">
@@ -356,6 +359,7 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 							<Segmented outline raised>
 								{BUZZER_WAVEFORM_OBJECT.map((item, index) => (
 									<SegmentedButton
+										key={index}
 										active={wave === index}
 										onClick={() => setWave(index)}
 									>
