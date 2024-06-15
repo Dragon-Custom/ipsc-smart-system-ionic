@@ -17,7 +17,6 @@ import { Menu, Toolbar } from "./components";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
-
 /* Basic CSS for apps built with Ionic */
 //!!! THIS CSS WILL BREAK THE KUI !!!
 // import "@ionic/react/css/normalize.css";
