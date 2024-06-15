@@ -62,7 +62,7 @@ function AppView() {
 								<Route
 									key={index}
 									path={appPage.url}
-									render={appPage.component}
+									component={appPage.component}
 									exact={true}
 								/>
 							))}
