@@ -19,7 +19,7 @@ import {
 } from "@ionic/react";
 import { time, timeOutline } from "ionicons/icons";
 import { FC, useMemo, useState } from "react";
-import { DragonCustomStopplate, StopplateSettingDTO, beep } from "../../lib";
+import { BUZZER_WAVEFORM_OBJECT, DragonCustomStopplate, StopplateSettingDTO, beep } from "../../lib";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import { ScreenReader } from "@capacitor/screen-reader";
 import { TimerSetting } from "./Setting";
@@ -54,6 +54,7 @@ const Timer: FC = () => {
 		let config = await Stopplate.retrieveConfig();
 		if (config == false) {
 			alert("Please connect to the stopplate first");
+			return;
 		}
 		config = config as StopplateSettingDTO;
 		let countdownTime =
@@ -72,7 +73,7 @@ const Timer: FC = () => {
 		}, 10);
 		setTimeout(() => {
 			if (!coundownFlag) return;
-			beep(1024, "sawtooth", 1000);
+			beep(config.buzzer_frequency, BUZZER_WAVEFORM_OBJECT[config.buzzer_waveform] , config.buzzer_duration * 1000);
 			Haptics.vibrate({ duration: 1000 });
 			stopCountdown();
 			setDisplayTime(0);
