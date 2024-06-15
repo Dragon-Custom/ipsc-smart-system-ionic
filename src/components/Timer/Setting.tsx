@@ -276,6 +276,8 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 	}
 
 	async function onApplyConfigButtonClicked() {
+		// this beep is for trigger the ios buzzer enable, without this, the buzzer will not beep on ios
+		beep(0, "sine", 1);
 		await BLEInstance.setConfig({
 			buzzer_duration: buzzerDuration,
 			buzzer_frequency: buzzerFrequency,
@@ -331,6 +333,10 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 				onIonModalDidPresent={() =>
 					setConnected(BLEInstance.isConnected)
 				}
+				onIonModalWillDismiss={() => {
+					// this beep is for trigger the ios buzzer enable, without this, the buzzer will not beep on ios
+					beep(0, "sine", 1);
+				}}
 				trigger={props.openTrigger}
 			>
 				<div className="wrapper">
