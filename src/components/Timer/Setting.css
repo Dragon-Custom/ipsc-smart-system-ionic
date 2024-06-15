@@ -1,0 +1,13 @@
+ion-modal#setting-modal {
+	--width: min(80vw, 1000px);
+	--min-width: 250px;
+	--height: min(80vh, 1000px);
+	--border-radius: 6px;
+	--box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+ion-modal#setting-modal .wrapper {
+	padding: 0;
+	margin: 0;
+	height: 50vh;
+}

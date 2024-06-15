@@ -20,4 +20,6 @@ const Toolbar: React.FC = () => {
 	);
 };
 
-export default Toolbar;
+export {
+	Toolbar,
+};
