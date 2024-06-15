@@ -1,13 +1,9 @@
 /// <reference types="vitest" />
-
-import legacy from "@vitejs/plugin-legacy";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import selfAssignCert from "@vitejs/plugin-basic-ssl";
 import { VitePWA } from "vite-plugin-pwa";
-import {
-	ServerOptions as HttpsServerOptions,
-} from "node:https";
+import { ServerOptions as HttpsServerOptions } from "node:https";
+import "dotenv/config";
 
 const https: HttpsServerOptions = {
 	key: "ssl/mTls/key.key",
@@ -19,13 +15,8 @@ const https: HttpsServerOptions = {
 export default defineConfig({
 	plugins: [
 		react(),
-		// legacy(),
 		VitePWA({
 			registerType: "autoUpdate",
-			// devOptions: {
-			// 	enabled: true,
-			// },
-			// mode: "development",
 		}),
 	],
 	test: {
@@ -35,6 +26,6 @@ export default defineConfig({
 	},
 	server: {
 		port: 8443,
-		https,
+		https: process.env.USE_HTTPS ? https : undefined,
 	},
 });

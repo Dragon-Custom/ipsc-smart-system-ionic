@@ -35,3 +35,4 @@ megalinter-reports/
 ssl
 
 dev-dist
+.env
