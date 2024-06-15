@@ -1,24 +1,16 @@
 import {
-	Block,
 	BlockTitle,
 	Button,
 	List,
-	ListButton,
 	ListItem,
-	Navbar,
-	Page,
-	useTheme,
 } from "konsta/react";
 import {
 	IonCol,
 	IonGrid,
-	IonIcon,
 	IonRow,
 	IonText,
-	useIonToast,
 } from "@ionic/react";
-import { time, timeOutline } from "ionicons/icons";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import {
 	BUZZER_WAVEFORM_OBJECT,
 	DragonCustomStopplate,
@@ -26,9 +18,7 @@ import {
 	beep,
 } from "../../lib";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
-import { ScreenReader } from "@capacitor/screen-reader";
 import { TimerSetting } from "./Setting";
-import { useQueue, useToggle } from "@uidotdev/usehooks";
 
 export interface HitRecord {
 	time: number;
@@ -239,6 +229,7 @@ const Timer: FC = () => {
 								<Button
 									disabled={buttonDisabled.review}
 									onClick={onReviewButtonClick}
+									large
 								>
 									Review
 								</Button>
@@ -247,6 +238,7 @@ const Timer: FC = () => {
 								<Button
 									disabled={buttonDisabled.start}
 									onClick={onStartButtonClick}
+									large
 								>
 									Start
 								</Button>
@@ -257,6 +249,7 @@ const Timer: FC = () => {
 								<Button
 									disabled={buttonDisabled.clear}
 									onClick={onClearButtonClick}
+									large
 								>
 									{countingDown ? "Stop" : "Clear"}
 								</Button>
@@ -265,6 +258,8 @@ const Timer: FC = () => {
 								<Button
 									disabled={buttonDisabled.setting}
 									id="timer-setting"
+									raised
+									large
 								>
 									Setting
 								</Button>

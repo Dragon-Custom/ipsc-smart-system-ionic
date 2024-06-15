@@ -1,28 +1,17 @@
 import {
-	IonIcon,
-	IonItem,
-	IonLabel,
-	IonList,
-	IonListHeader,
 	IonModal,
 	IonRange,
 	IonText,
 	useIonLoading,
-	useIonToast,
 } from "@ionic/react";
-import { personCircle } from "ionicons/icons";
 import { FC, useEffect, useRef, useState } from "react";
 import "./Setting.css";
 import {
-	Block,
-	BlockHeader,
 	BlockTitle,
 	Button,
 	List,
-	ListInput,
 	ListItem,
 	Page,
-	Range,
 	Segmented,
 	SegmentedButton,
 	Toolbar,
@@ -31,11 +20,9 @@ import {
 	BUZZER_WAVEFORM_OBJECT,
 	BuzzerWaveformType,
 	DragonCustomStopplate,
-	StopplateSettingDTO,
 	beep,
 } from "../../lib";
 import { delay } from "../../lib/delay";
-import { useCounter } from "@uidotdev/usehooks";
 
 // Create a new component IndicatorDurationSelector.tsx
 
@@ -353,6 +340,7 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 									? onDisconnectButtonClicked
 									: onConnectButtonClicked
 							}
+							largeIos
 						>
 							{connected ? "Disconnect" : "Connect"}
 						</Button>
@@ -361,6 +349,7 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 								outline
 								raised
 								onClick={onApplyConfigButtonClicked}
+								largeIos
 							>
 								Apply change
 							</Button>
@@ -383,6 +372,7 @@ const TimerSetting: FC<TimerSettingProps> = (props: TimerSettingProps) => {
 								tonal
 								raised
 								onClick={onTestBuzzerButtonClicked}
+								largeIos
 							>
 								Test buzzer
 							</Button>

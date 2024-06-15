@@ -1,20 +1,12 @@
-import { BuzzerWaveformType } from "./buzzer";
 import {
 	BleClient,
 	BleDevice,
-	numbersToDataView,
-	numberToUUID,
 } from "@capacitor-community/bluetooth-le";
 import {
-	CallbackID,
-	Singleton,
 	StopPlate,
-	StopPlateHitCallback,
 	StopplateSettingDTO,
 } from "./stopplate";
-import { App } from "@capacitor/app";
 import { Device } from "@capacitor/device";
-import { delay } from "./delay";
 
 const SERVICE_UUID = "7a0247e7-8e88-409b-a959-ab5092ddb03e";
 const START_SIGNAL_CHARACTERISTIC_UUID = "3c224d84-566d-4f13-8b1c-2117021ff1a2";
