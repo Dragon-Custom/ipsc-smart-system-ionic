@@ -21,13 +21,13 @@ import {
 	BuzzerWaveformType,
 	DragonCustomStopplate,
 	beep,
+	delay,
 } from "../../lib";
-import { delay } from "../../lib/delay";
 
 // Create a new component IndicatorDurationSelector.tsx
 
 import React from "react";
-import { useControl } from "../../lib/useControl";
+import { useControl } from "../../hooks";
 
 interface SettingSliderBlockProps {
 	value: number | number[];

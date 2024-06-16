@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
 	IonApp,
-	IonButtons,
 	IonContent,
-	IonHeader,
-	IonMenuButton,
 	IonRouterOutlet,
 	IonSplitPane,
-	IonTitle,
-	IonToolbar,
 	setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { Route, useLocation } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Menu, Toolbar } from "./components";
 import { App as KUIApp } from "konsta/react";
 
@@ -46,7 +41,7 @@ import "@ionic/react/css/palettes/dark.class.css";
 /* Theme variables */
 import { appPages } from "./appPage";
 import { KonstaProvider, Page } from "konsta/react";
-import { useSetting } from "./lib/useSetting";
+import { useSetting } from "./hooks";
 
 function AppView() {
 	return (

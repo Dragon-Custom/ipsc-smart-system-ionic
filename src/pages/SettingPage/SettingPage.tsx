@@ -1,6 +1,6 @@
 import { List, Page } from "konsta/react";
 import { FC } from "react";
-import { useSetting } from "../../lib/useSetting";
+import { useSetting } from "../../hooks";
 
 const SettingPage: FC = () => {
 	const {
