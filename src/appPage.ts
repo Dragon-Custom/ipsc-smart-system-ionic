@@ -1,13 +1,15 @@
 import {
 	homeOutline,
 	homeSharp,
+	peopleOutline,
+	peopleSharp,
 	settingsOutline,
 	settingsSharp,
 	timeSharp,
 	timerOutline,
 } from "ionicons/icons";
 
-import { HomePage, SettingPage, TimerPage } from "./pages";
+import { HomePage, SettingPage, ShooterPage, TimerPage } from "./pages";
 
 interface AppPage {
 	url: string;
@@ -30,6 +32,13 @@ export const appPages: AppPage[] = [
 		iosIcon: timerOutline,
 		mdIcon: timeSharp,
 		component: TimerPage,
+	},
+	{
+		title: "Shooters",
+		url: "/shooters",
+		iosIcon: peopleOutline,
+		mdIcon: peopleSharp,
+		component: ShooterPage,
 	},
 	{
 		title: "Settings",
