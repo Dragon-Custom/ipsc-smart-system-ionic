@@ -42,6 +42,8 @@ import "@ionic/react/css/palettes/dark.class.css";
 import { appPages } from "./appPage";
 import { KonstaProvider, Page } from "konsta/react";
 import { useSetting } from "./hooks";
+import { client } from "./lib";
+import { ApolloProvider } from "@apollo/client";
 
 function AppView() {
 	return (
@@ -84,17 +86,19 @@ const App: React.FC = () => {
 		sanitizerEnabled: true,
 	});
 	return (
-		<KonstaProvider theme={useMd ? "material" : "ios"}>
-			<KUIApp theme={useMd ? "material" : "ios"}>
-				<Page>
-					<IonApp>
-						<IonReactRouter>
-							<AppView />
-						</IonReactRouter>
-					</IonApp>
-				</Page>
-			</KUIApp>
-		</KonstaProvider>
+		<ApolloProvider client={client}>
+			<KonstaProvider theme={useMd ? "material" : "ios"}>
+				<KUIApp theme={useMd ? "material" : "ios"}>
+					<Page>
+						<IonApp>
+							<IonReactRouter>
+								<AppView />
+							</IonReactRouter>
+						</IonApp>
+					</Page>
+				</KUIApp>
+			</KonstaProvider>
+		</ApolloProvider>
 	);
 };
 
