@@ -14,7 +14,7 @@ import { Client, ClientOptions, createClient } from "graphql-sse";
 
 /* #region create Websocket link for subscription */
 const httpLink = new HttpLink({
-	uri: import.meta.env.GRAPHQL_API_ENDPOINT,
+	uri: import.meta.env.VITE_GRAPHQL_API_ENDPOINT,
 });
 
 class SSELink extends ApolloLink {
@@ -39,7 +39,7 @@ class SSELink extends ApolloLink {
 	}
 }
 const sseLink = new SSELink({
-	url: import.meta.env.GRAPHQL_API_ENDPOINT ?? "",
+	url: import.meta.env.VITE_GRAPHQL_API_ENDPOINT ?? "",
 });
 
 const splitLink = split(
